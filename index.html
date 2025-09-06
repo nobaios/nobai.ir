@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thenobai - نابغه دیجیتال همزیست شما</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&display=swap');
+        
+        * {
+            font-family: 'Vazirmatn', sans-serif;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .gradient-header {
+            background: linear-gradient(135deg, #a855f7 0%, #3b82f6 100%);
+        }
+        
+        .glass {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .card-gradient {
+            background: linear-gradient(135deg, #a855f7 0%, #3b82f6 100%);
+        }
+        
+        .google-btn {
+            background: white;
+            border: 1px solid #dadce0;
+            color: #3c4043;
+            cursor: pointer;
+            font-size: 14px;
+            padding: 11px 24px;
+            border-radius: 24px;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+        
+        .google-btn:hover {
+            background: #f8f9fa;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        .pulse {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: .5; }
+        }
+        
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+        
+        @keyframes floating {
+            0% { transform: translate(0, 0px); }
+            50% { transform: translate(0, -20px); }
+            100% { transform: translate(0, -0px); }
+        }
+        
+        .glow {
+            text-shadow: 0 0 20px rgba(102, 126, 234, 0.8);
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        input[type="tel"] {
+            direction: ltr;
+            text-align: center;
+        }
+        
+        /* Dashboard Styles */
+        .status-card {
+            background: white;
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .status-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+        
+        .progress-bar {
+            height: 8px;
+            border-radius: 4px;
+            background: #e5e7eb;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            transition: width 0.5s ease;
+        }
+        
+        .action-button {
+            background: white;
+            border: 2px solid #e5e7eb;
+            border-radius: 16px;
+            padding: 24px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .action-button:hover {
+            border-color: #a855f7;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(168, 85, 247, 0.1);
+        }
+        
+        .chat-container {
+            background: white;
+            border-radius: 24px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            padding: 32px;
+            margin-top: 32px;
+        }
+        
+        .intent-chip {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
+            background: #f3f4f6;
+            color: #374151;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 4px;
+        }
+        
+        .intent-chip:hover {
+            background: #e5e7eb;
+            transform: scale(1.05);
+        }
+        
+        .intent-chip.active {
+            background: linear-gradient(135deg, #a855f7 0%, #3b82f6 100%);
+            color: white;
+        }
+        
+        .input-container {
+            position: relative;
+            background: #f9fafb;
+            border-radius: 16px;
+            padding: 16px;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+        
+        .input-container:focus-within {
+            border-color: #a855f7;
+            background: white;
+        }
+        
+        .message-input {
+            width: 100%;
+            background: transparent;
+            border: none;
+            outline: none;
+            font-size: 16px;
+            resize: none;
+            min-height: 60px;
+        }
+        
+        .attachment-button {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #f3f4f6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .attachment-button:hover {
+            background: #e5e7eb;
+            transform: scale(1.1);
+        }
+        
+        .send-button {
+            background: linear-gradient(135deg, #a855f7 0%, #3b82f6 100%);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .send-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 10px 15px -3px rgba(168, 85, 247, 0.3);
+        }
+        
+        .life-card {
+            background: white;
+            border-radius: 16px;
+            padding: 16px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            border: 1px solid #f3f4f6;
+        }
+        
+        .life-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            border-color: #e5e7eb;
+        }
+        
+        .life-indicator {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 8px;
+        }
+        
+        .recording {
+            animation: pulse-red 1.5s infinite;
+        }
+        
+        @keyframes pulse-red {
+            0% {
+                box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7);
+            }
+            70% {
+                box-shadow: 0 0 0 10px rgba(239, 68, 68, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(239, 68, 68, 0);
+            }
+        }
+        
+        .weekly-bar {
+            transition: all 0.3s ease;
+        }
+        
+        .weekly-bar:hover {
+            opacity: 0.8;
+        }
+        
+        @media (max-width: 1024px) {
+            .grid-layout {
+                grid-template-columns: 1fr !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Landing Page -->
+    <div id="landingPage" class="min-h-screen gradient-bg flex items-center justify-center p-4">
+        <div class="max-w-4xl w-full">
+            <div class="text-center mb-8">
+                <h1 class="text-7xl md:text-8xl font-bold text-white mb-4 floating">
+                    Nobai
+                </h1>
+                <p class="text-xl md:text-2xl text-white/90 mb-2">
+                    نابغه دیجیتال | همزیست هوشمند شما
+                </p>
+                <p class="text-lg text-white/70">
+                    آینده‌ای که در آن تنها نیستید
+                </p>
+            </div>
+            
+            <div class="glass rounded-3xl p-8 md:p-12 max-w-xl mx-auto">
+                <h2 class="text-2xl md:text-3xl font-semibold text-white mb-8 text-center">
+                    آغاز تکامل دیجیتال
+                </h2>
+                
+                <!-- Google Sign In -->
+                <button onclick="handleGoogleSignIn()" class="google-btn w-full mb-4">
+                    <svg width="18" height="18" viewBox="0 0 18 18">
+                        <path fill="#4285F4" d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844c-.209 1.125-.843 2.078-1.796 2.717v2.258h2.908c1.702-1.567 2.684-3.874 2.684-6.615z"/>
+                        <path fill="#34A853" d="M9 18c2.43 0 4.467-.806 5.956-2.18l-2.908-2.259c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332C2.438 15.983 5.482 18 9 18z"/>
+                        <path fill="#FBBC04" d="M3.964 10.71c-.18-.54-.282-1.117-.282-1.71s.102-1.17.282-1.71V4.958H.957C.347 6.173 0 7.548 0 9s.348 2.827.957 4.042l3.007-2.332z"/>
+                        <path fill="#EA4335" d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0 5.482 0 2.438 2.017.957 4.958L3.964 7.29C4.672 5.163 6.656 3.58 9 3.58z"/>
+                    </svg>
+                    ورود با حساب گوگل
+                </button>
+                
+                <!-- Phone Sign In -->
+                <button onclick="showPhoneLogin()" class="w-full px-6 py-4 bg-white/20 hover:bg-white/30 text-white font-semibold rounded-full transition-all duration-300 flex items-center justify-center gap-3">
+                    <i class="fas fa-mobile-alt"></i>
+                    <span>ورود با شماره موبایل</span>
+                </button>
+                
+                <!-- Demo Access -->
+                <div class="text-center mt-6">
+                    <button onclick="demoLogin()" class="text-white/70 hover:text-white text-sm">
+                        ورود آزمایشی بدون ثبت‌نام
+                    </button>
+                </div>
+                
+                <!-- Features -->
+                <div class="grid grid-cols-3 gap-4 mt-10">
+                    <div class="text-center">
+                        <div class="text-3xl mb-2">❤️</div>
+                        <h3 class="text-white/90 text-sm font-medium">هوش احساسی</h3>
+                        <p class="text-white/60 text-xs mt-1">احساسات شما را درک می‌کند</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-3xl mb-2">📊</div>
+                        <h3 class="text-white/90 text-sm font-medium">ذهن مالی</h3>
+                        <p class="text-white/60 text-xs mt-1">در خواب شما معامله می‌کند</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-3xl mb-2">🧠</div>
+                        <h3 class="text-white/90 text-sm font-medium">هوش مصنوعی آگاه</h3>
+                        <p class="text-white/60 text-xs mt-1">۲۴/۷ با شما زندگی می‌کند</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Main Dashboard -->
+    <div id="dashboardPage" class="min-h-screen bg-gray-50 hidden">
+        <!-- Header -->
+        <div class="gradient-header text-white p-6">
+            <div class="max-w-7xl mx-auto">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h1 class="text-3xl font-bold mb-1">خوش آمدید به Thenobai</h1>
+                        <p class="opacity-90">نابغه دیجیتال شما آماده همراهی است. بیایید با هم رشد کنیم.</p>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <span class="text-2xl font-bold">🌟 Thenobai</span>
+                        <button onclick="logout()" class="p-2 rounded-lg hover:bg-white/20 transition">
+                            <i class="fas fa-sign-out-alt"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Main Content Grid -->
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 py-8">
+            <div class="grid grid-cols-1 lg:grid-cols-4 gap-6 grid-layout">
+                <!-- Right Side - Life Management -->
+                <div class="lg:col-span-1 order-first lg:order-last space-y-4">
+                    <div class="mb-4 bg-gradient-to-r from-purple-500 to-blue-500 text-white rounded-xl p-3 text-center">
+                        <h2 class="text-lg font-semibold">مدیریت جامع زندگی</h2>
+                        <p class="text-sm opacity-90">همزیست شما در تمام لحظات</p>
+                        <div class="mt-3 bg-white/20 rounded-full h-2 overflow-hidden">
+                            <div class="bg-white h-full rounded-full transition-all duration-500" style="width: 65%"></div>
+                        </div>
+                        <p class="text-xs mt-1 opacity-90">۶۵٪ از برنامه امروز تکمیل شده</p>
+                    </div>
+                    
+                    <!-- Health Card -->
+                    <div class="bg-white rounded-xl p-4 shadow-sm hover:shadow-md transition-shadow">
+                        <div class="flex items-center gap-2 mb-3">
+                            <span class="text-2xl">💚</span>
+                            <h3 class="font-semibold text-gray-800">سلامت و تندرستی</h3>
+                        </div>
+                        <div class="space-y-2 text-sm">
+                            <div class="flex items-center gap-2 text-gray-700 cursor-pointer hover:bg-gray-50 p-1 rounded" onclick="showLifeDetails('health', 'water')">
+                                <span class="text-green-500">●</span>
+                                <span>آب: ۴ لیوان | بیوفیدبک آماده</span>
+                            </div>
+                            <div class="flex items-center gap-2 text-gray-700 cursor-pointer hover:bg-gray-50 p-1 rounded" onclick="showLifeDetails('health', 'medicine')">
+                                <span class="text-red-500">●</span>
+                                <span>وقت داروی فشار: ۴ ساعت دیگر</span>
+                            </div>
+                            <div class="flex items-center gap-2 text-gray-600 bg-gray-50 rounded-lg p-2 mt-2 cursor-pointer hover:bg-gray-100" onclick="showLifeDetails('health', 'biometric')">
+                                <span>❤️</span>
+                                <span class="text-xs">ضربان: ۷۲ | فشار: ۱۲۰/۸۰</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Daily Schedule Card -->
+                    <div class="bg-white rounded-xl p-4 shadow-sm hover:shadow-md transition-shadow">
+                        <div class="flex items-center gap-2 mb-3">
+                            <span class="text-2xl">📅</span>
+                            <h3 class="font-semibold text-gray-800">برنامه روزانه</h3>
+                        </div>
+                        <div class="space-y-2 text-sm">
+                            <div class="flex items-center gap-2 text-gray-700 cursor-pointer hover:bg-gray-50 p-1 rounded" onclick="showLifeDetails('schedule', 'study')">
+                                <span class="text-blue-500">🎓</span>
+                                <span>تحصیل: ۱۰-۸ صبح</span>
+                            </div>
+                            <div class="flex items-center gap-2 text-gray-700 cursor-pointer hover:bg-gray-50 p-1 rounded" onclick="showLifeDetails('schedule', 'meeting')">
+                                <span class="text-purple-500">👥</span>
+                                <span>جلسه: ۱۲-۱۰ تیم فروش</span>
+                            </div>
+                            <div class="flex items-center gap-2 text-gray-700 cursor-pointer hover:bg-gray-50 p-1 rounded" onclick="showLifeDetails('schedule', 'shopping')">
+                                <span class="text-orange-500">🛒</span>
+                                <span>خرید: ۷-۶ عصر | لیست آماده</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Relationships Card -->
+                    <div class="bg-white rounded-xl p-4 shadow-sm hover:shadow-md transition-shadow">
+                        <div class="flex items-center gap-2 mb-3">
+                            <span class="text-2xl">❤️</span>
+                            <h3 class="font-semibold text-gray-800">روابط و ارتباطات</h3>
+                        </div>
+                        <div class="space-y-2 text-sm">
+                            <div class="flex items-center gap-2 text-gray-700 cursor-pointer hover:bg-gray-50 p-1 rounded" onclick="showLifeDetails('relationships', 'call')">
+                                <span class="text-yellow-500">📞</span>
+                                <span>تماس با مادر: ۳ روز گذشته</span>
+                            </div>
+                            <div class="flex items-center gap-2 text-gray-700 cursor-pointer hover:bg-gray-50 p-1 rounded" onclick="showLifeDetails('relationships', 'congratulate')">
+                                <span class="text-pink-500">💐</span>
+                                <span>تبریک عروسی پریا</span>
+                            </div>
+                            <div class="flex items-center gap-2 text-gray-700 cursor-pointer hover:bg-gray-50 p-1 rounded" onclick="showLifeDetails('relationships', 'birthday')">
+                                <span class="text-purple-500">🎂</span>
+                                <span>تولد سارا: ۲ هفته دیگر</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- View All Button -->
+                    <button class="w-full py-3 bg-gradient-to-r from-purple-500 to-blue-500 text-white rounded-xl hover:from-purple-600 hover:to-blue-600 transition-all duration-300 font-medium text-sm">
+                        مشاهده همه فعالیت‌ها
+                    </button>
+                    
+                    <!-- Weekly Performance -->
+                    <div class="bg-white rounded-xl p-4 shadow-sm">
+                        <h4 class="text-sm font-semibold text-gray-700 mb-2">عملکرد هفتگی</h4>
+                        <div class="flex justify-between items-end h-20">
+                            <div class="flex-1 mx-1 bg-gray-200 rounded-t-lg weekly-bar" style="height: 60%">
+                                <div class="bg-gradient-to-t from-purple-500 to-blue-500 rounded-t-lg w-full" style="height: 80%"></div>
+                            </div>
+                            <div class="flex-1 mx-1 bg-gray-200 rounded-t-lg weekly-bar" style="height: 80%">
+                                <div class="bg-gradient-to-t from-purple-500 to-blue-500 rounded-t-lg w-full" style="height: 70%"></div>
+                            </div>
+                            <div class="flex-1 mx-1 bg-gray-200 rounded-t-lg weekly-bar" style="height: 70%">
+                                <div class="bg-gradient-to-t from-purple-500 to-blue-500 rounded-t-lg w-full" style="height: 90%"></div>
+                            </div>
+                            <div class="flex-1 mx-1 bg-gray-200 rounded-t-lg weekly-bar" style="height: 90%">
+                                <div class="bg-gradient-to-t from-purple-500 to-blue-500 rounded-t-lg w-full" style="height: 85%"></div>
+                            </div>
+                            <div class="flex-1 mx-1 bg-gray-200 rounded-t-lg weekly-bar" style="height: 100%">
+                                <div class="bg-gradient-to-t from-purple-500 to-blue-500 rounded-t-lg w-full" style="height: 95%"></div>
+                            </div>
+                            <div class="flex-1 mx-1 bg-gray-200 rounded-t-lg weekly-bar" style="height: 85%">
+                                <div class="bg-gradient-to-t from-purple-500 to-blue-500 rounded-t-lg w-full" style="height: 75%"></div>
+                            </div>
+                            <div class="flex-1 mx-1 bg-gray-200 rounded-t-lg weekly-bar" style="height: 65%">
+                                <div class="bg-gradient-to-t from-purple-500 to-blue-500 rounded-t-lg w-full animate-pulse" style="height: 100%"></div>
+                            </div>
+                        </div>
+                        <div class="flex justify-between mt-2 text-xs text-gray-500">
+                            <span>ش</span>
+                            <span>ی</span>
+                            <span>د</span>
+                            <span>س</span>
+                            <span>چ</span>
+                            <span>پ</span>
+                            <span>ج</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Left Side - Original Content -->
+                <div class="lg:col-span-3">
+                    <h2 class="text-xl font-semibold mb-6">وضعیت آگاهی</h2>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        <!-- Energy -->
+                        <div class="status-card">
+                            <div class="flex items-center justify-between mb-3">
+                                <span class="text-gray-600">انرژی</span>
+                                <span class="text-2xl">⚡</span>
+                            </div>
+                            <div class="text-3xl font-bold mb-3">۹۹٪</div>
+                            <div class="progress-bar">
+                                <div class="progress-fill bg-yellow-500" style="width: 99%"></div>
+                            </div>
+                        </div>
+                        
+                        <!-- Focus -->
+                        <div class="status-card">
+                            <div class="flex items-center justify-between mb-3">
+                                <span class="text-gray-600">تمرکز</span>
+                                <span class="text-2xl">🎯</span>
+                            </div>
+                            <div class="text-3xl font-bold mb-3">۷۹٪</div>
+                            <div class="progress-bar">
+                                <div class="progress-fill bg-blue-500" style="width: 79%"></div>
+                            </div>
+                        </div>
+                        
+                        <!-- Mood -->
+                        <div class="status-card">
+                            <div class="flex items-center justify-between mb-3">
+                                <span class="text-gray-600">حال و روز</span>
+                                <span class="text-2xl">😊</span>
+                            </div>
+                            <div class="text-xl font-bold mb-3">پرانرژی</div>
+                            <div class="text-sm text-gray-500">پایدار</div>
+                        </div>
+                        
+                        <!-- Market Sense -->
+                        <div class="status-card">
+                            <div class="flex items-center justify-between mb-3">
+                                <span class="text-gray-600">حس بازار</span>
+                                <span class="text-2xl">📈</span>
+                            </div>
+                            <div class="text-3xl font-bold mb-3">۶۱٪</div>
+                            <div class="progress-bar">
+                                <div class="progress-fill bg-purple-500" style="width: 61%"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Action Buttons -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-8">
+                        <div class="action-button" onclick="selectIntent('future')">
+                            <div class="text-center">
+                                <span class="text-3xl mb-2 block">🚀</span>
+                                <h3 class="font-semibold text-lg">مدل‌سازی آینده</h3>
+                            </div>
+                        </div>
+                        
+                        <div class="action-button" onclick="selectIntent('analysis')">
+                            <div class="text-center">
+                                <span class="text-3xl mb-2 block">🧠</span>
+                                <h3 class="font-semibold text-lg">تحلیل عمیق</h3>
+                            </div>
+                        </div>
+                        
+                        <div class="action-button card-gradient text-white" onclick="selectIntent('chat')">
+                            <div class="text-center">
+                                <span class="text-3xl mb-2 block">💬</span>
+                                <h3 class="font-semibold text-lg">گفتگو با نابغه</h3>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Chat Interface -->
+                    <div class="chat-container mt-8">
+                        <h3 class="font-semibold text-lg mb-4">چه کاری می‌توانم برایتان انجام دهم؟</h3>
+                        
+                        <!-- Intent Chips -->
+                        <div class="mb-6">
+                            <div class="intent-chip" onclick="selectIntentChip(this, 'health')">
+                                💪 سلامت و تندرستی
+                            </div>
+                            <div class="intent-chip" onclick="selectIntentChip(this, 'finance')">
+                                💰 مالی و سرمایه‌گذاری
+                            </div>
+                            <div class="intent-chip" onclick="selectIntentChip(this, 'productivity')">
+                                📈 بهره‌وری و برنامه‌ریزی
+                            </div>
+                            <div class="intent-chip" onclick="selectIntentChip(this, 'relationships')">
+                                ❤️ روابط و ارتباطات
+                            </div>
+                            <div class="intent-chip" onclick="selectIntentChip(this, 'creativity')">
+                                🎨 خلاقیت و نوآوری
+                            </div>
+                            <div class="intent-chip" onclick="selectIntentChip(this, 'learning')">
+                                📚 یادگیری و رشد
+                            </div>
+                            <div class="intent-chip" onclick="selectIntentChip(this, 'other')">
+                                ✨ موضوع دیگر
+                            </div>
+                        </div>
+                        
+                        <!-- Input Area -->
+                        <div class="input-container">
+                            <textarea 
+                                id="messageInput"
+                                class="message-input"
+                                placeholder="پیام خود را بنویسید یا از دکمه‌های زیر استفاده کنید..."
+                                rows="3"
+                            ></textarea>
+                            
+                            <div class="flex items-center justify-between mt-4">
+                                <div class="flex gap-2">
+                                    <!-- Attachment Button -->
+                                    <label class="attachment-button">
+                                        <input type="file" class="hidden" id="fileInput" onchange="handleFileSelect(event)">
+                                        <i class="fas fa-paperclip text-gray-600"></i>
+                                    </label>
+                                    
+                                    <!-- Voice Button -->
+                                    <button class="attachment-button" id="voiceButton" onclick="toggleVoiceRecording()">
+                                        <i class="fas fa-microphone text-gray-600"></i>
+                                    </button>
+                                    
+                                    <!-- Image Button -->
+                                    <label class="attachment-button">
+                                        <input type="file" accept="image/*" class="hidden" onchange="handleImageSelect(event)">
+                                        <i class="fas fa-image text-gray-600"></i>
+                                    </label>
+                                </div>
+                                
+                                <!-- Send Button -->
+                                <button class="send-button" onclick="sendMessage()">
+                                    <i class="fas fa-paper-plane"></i>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- File Preview Area -->
+                        <div id="filePreview" class="mt-4 hidden">
+                            <div class="bg-gray-100 rounded-lg p-3 flex items-center justify-between">
+                                <div class="flex items-center gap-2">
+                                    <i class="fas fa-file text-gray-600"></i>
+                                    <span id="fileName" class="text-sm text-gray-700"></span>
+                                </div>
+                                <button onclick="clearFile()" class="text-red-500 hover:text-red-700">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Login Functions
+        function demoLogin() {
+            loginUser('کاربر آزمایشی');
+        }
+        
+        function handleGoogleSignIn() {
+            alert('ورود با گوگل به زودی فعال می‌شود');
+            loginUser('کاربر گوگل');
+        }
+        
+        function showPhoneLogin() {
+            // در نسخه کامل، فرم شماره موبایل نمایش داده می‌شود
+            alert('ورود با شماره موبایل به زودی فعال می‌شود');
+            loginUser('کاربر موبایل');
+        }
+        
+        function loginUser(userName) {
+            // Store user data
+            localStorage.setItem('userName', userName);
+            
+            // Show dashboard
+            document.getElementById('landingPage').classList.add('hidden');
+            document.getElementById('dashboardPage').classList.remove('hidden');
+        }
+        
+        function logout() {
+            localStorage.clear();
+            location.reload();
+        }
+        
+        // Dashboard Functions
+        let selectedIntent = null;
+        let attachedFile = null;
+        let isRecording = false;
+        let mediaRecorder = null;
+        let audioChunks = [];
+        
+        function selectIntent(type) {
+            selectedIntent = type;
+            console.log('Selected intent:', type);
+            
+            // Update UI to show selected intent
+            document.querySelectorAll('.action-button').forEach(btn => {
+                btn.classList.remove('card-gradient', 'text-white');
+            });
+            
+            event.currentTarget.classList.add('card-gradient', 'text-white');
+            
+            // Focus on input
+            document.getElementById('messageInput').focus();
+        }
+        
+        function selectIntentChip(chip, intent) {
+            // Remove active class from all chips
+            document.querySelectorAll('.intent-chip').forEach(c => {
+                c.classList.remove('active');
+            });
+            
+            // Add active class to selected chip
+            chip.classList.add('active');
+            selectedIntent = intent;
+            
+            // Update placeholder based on intent
+            const placeholders = {
+                'health': 'درباره سلامتی، ورزش یا تغذیه خود بپرسید...',
+                'finance': 'سوالات مالی، سرمایه‌گذاری یا بودجه‌بندی...',
+                'productivity': 'برنامه‌ریزی، مدیریت زمان یا بهره‌وری...',
+                'relationships': 'مشاوره در روابط، خانواده یا دوستان...',
+                'creativity': 'ایده‌پردازی، پروژه‌های خلاقانه یا هنر...',
+                'learning': 'یادگیری مهارت جدید، مطالعه یا رشد شخصی...',
+                'other': 'هر موضوعی که در ذهن دارید...'
+            };
+            
+            document.getElementById('messageInput').placeholder = placeholders[intent] || 'پیام خود را بنویسید...';
+            document.getElementById('messageInput').focus();
+        }
+        
+        function handleFileSelect(event) {
+            const file = event.target.files[0];
+            if (file) {
+                attachedFile = file;
+                document.getElementById('fileName').textContent = file.name;
+                document.getElementById('filePreview').classList.remove('hidden');
+            }
+        }
+        
+        function handleImageSelect(event) {
+            const file = event.target.files[0];
+            if (file && file.type.startsWith('image/')) {
+                attachedFile = file;
+                document.getElementById('fileName').textContent = '🖼️ ' + file.name;
+                document.getElementById('filePreview').classList.remove('hidden');
+            }
+        }
+        
+        function clearFile() {
+            attachedFile = null;
+            document.getElementById('filePreview').classList.add('hidden');
+            document.getElementById('fileInput').value = '';
+        }
+        
+        async function toggleVoiceRecording() {
+            const voiceButton = document.getElementById('voiceButton');
+            const icon = voiceButton.querySelector('i');
+            
+            if (!isRecording) {
+                // Start recording
+                try {
+                    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                    mediaRecorder = new MediaRecorder(stream);
+                    audioChunks = [];
+                    
+                    mediaRecorder.ondataavailable = event => {
+                        audioChunks.push(event.data);
+                    };
+                    
+                    mediaRecorder.onstop = () => {
+                        const audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
+                        attachedFile = new File([audioBlob], 'voice_message.wav', { type: 'audio/wav' });
+                        document.getElementById('fileName').textContent = '🎤 پیام صوتی';
+                        document.getElementById('filePreview').classList.remove('hidden');
+                    };
+                    
+                    mediaRecorder.start();
+                    isRecording = true;
+                    voiceButton.classList.add('recording');
+                    icon.classList.remove('fa-microphone');
+                    icon.classList.add('fa-stop');
+                    icon.style.color = '#ef4444';
+                } catch (err) {
+                    console.error('Error accessing microphone:', err);
+                    alert('لطفا دسترسی به میکروفون را فعال کنید');
+                }
+            } else {
+                // Stop recording
+                mediaRecorder.stop();
+                mediaRecorder.stream.getTracks().forEach(track => track.stop());
+                isRecording = false;
+                voiceButton.classList.remove('recording');
+                icon.classList.remove('fa-stop');
+                icon.classList.add('fa-microphone');
+                icon.style.color = '#4b5563';
+            }
+        }
+        
+        function sendMessage() {
+            const messageInput = document.getElementById('messageInput');
+            const message = messageInput.value.trim();
+            
+            if (message || attachedFile) {
+                const data = {
+                    message: message,
+                    intent: selectedIntent,
+                    file: attachedFile ? attachedFile.name : null,
+                    timestamp: new Date().toISOString()
+                };
+                
+                console.log('Sending:', data);
+                
+                // Clear input
+                messageInput.value = '';
+                clearFile();
+                
+                // Show confirmation
+                showNotification('پیام شما ارسال شد! Thenobai در حال پردازش است...');
+            }
+        }
+        
+        function showNotification(message) {
+            // Create notification element
+            const notification = document.createElement('div');
+            notification.className = 'fixed bottom-4 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg z-50';
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            
+            // Remove after 3 seconds
+            setTimeout(() => {
+                notification.remove();
+            }, 3000);
+        }
+        
+        // Life Management Functions
+        function showLifeDetails(type, item) {
+            const messages = {
+                health: {
+                    water: 'شما تا کنون ۴ لیوان آب نوشیده‌اید. ۴ لیوان دیگر برای رسیدن به هدف روزانه باقی مانده.',
+                    medicine: 'دارو: آملودیپین ۵mg - زمان مصرف: ساعت ۸ شب',
+                    biometric: 'وضعیت سلامت شما عالی است. ضربان قلب و فشار خون در محدوده طبیعی.'
+                },
+                schedule: {
+                    study: 'جلسه مطالعه: ریاضیات پیشرفته - فصل ۵: انتگرال',
+                    meeting: 'جلسه با تیم فروش - بررسی گزارش فصلی و اهداف Q2',
+                    shopping: 'لیست خرید: شیر، نان، میوه، سبزیجات، مرغ'
+                },
+                relationships: {
+                    call: 'یادآوری: با مادر تماس بگیرید - آخرین تماس ۳ روز پیش',
+                    congratulate: 'عروسی پریا - فردا ساعت ۷ عصر - هدیه آماده شده',
+                    birthday: 'تولد سارا - ۱۴ اردیبهشت - پیشنهاد هدیه: کتاب مورد علاقه‌اش'
+                }
+            };
+            
+            const message = messages[type]?.[item] || 'جزئیات در حال بارگذاری...';
+            showNotification(message);
+        }
+        
+        // Handle Enter key in textarea
+        document.addEventListener('DOMContentLoaded', function() {
+            const messageInput = document.getElementById('messageInput');
+            if (messageInput) {
+                messageInput.addEventListener('keydown', function(e) {
+                    if (e.key === 'Enter' && !e.shiftKey) {
+                        e.preventDefault();
+                        sendMessage();
+                    }
+                });
+            }
+        });
+        
+        // Check if user is already logged in
+        window.onload = function() {
+            const savedUser = localStorage.getItem('userName');
+            if (savedUser) {
+                loginUser(savedUser);
+            }
+        };
+    </script>
+</body>
+</html>
